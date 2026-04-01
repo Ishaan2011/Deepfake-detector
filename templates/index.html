@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deepfake Detector</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <section class="hero card">
+      <h1>Deepfake Detector</h1>
+      <p class="subtitle">Paste a YouTube link. We download the video, run both models, and show their scores.</p>
+      <div class="hero-actions">
+        <button id="theme-toggle" class="button ghost" type="button">Switch To Dark</button>
+        <button id="logs-toggle" class="button ghost" type="button">Show Logs Panel</button>
+      </div>
+    </section>
+
+    <section class="input-panel card">
+      <form id="analyze-form">
+        <label for="youtube-url">YouTube Video URL</label>
+        <div class="row">
+          <input id="youtube-url" name="youtube-url" type="url" placeholder="https://www.youtube.com/watch?v=..." required />
+          <button class="button primary" id="submit-btn" type="submit">Analyze</button>
+        </div>
+      </form>
+      <div id="status" class="status" aria-live="polite"></div>
+    </section>
+
+    <section id="results" class="results">
+      <article class="score card overall-card">
+        <h2>Overall Verdict</h2>
+        <p class="score-value overall-word" id="overall-verdict">Not done yet</p>
+        <p class="hint">Final decision from combined model confidence</p>
+      </article>
+      <article class="score card">
+        <h2>
+          MesoNet Score
+          <span
+            class="tooltip-help"
+            tabindex="0"
+            aria-label="MesoNet model description"
+            data-tooltip="MesoNet is a frame-level CNN that analyzes visual artifacts in faces to classify real vs fake content."
+          >?</span>
+        </h2>
+        <p class="score-value" id="meso-score">Not done yet</p>
+        <p class="hint">0 = Real, 1 = Fake</p>
+      </article>
+      <article class="score card">
+        <h2>
+          Temp-D3 Score
+          <span
+            class="tooltip-help"
+            tabindex="0"
+            aria-label="Temp-D3 model description"
+            data-tooltip="Temp-D3 is a temporal model that checks motion and frame consistency to detect deepfake anomalies over time."
+          >?</span>
+        </h2>
+        <p class="score-value" id="d3-score">Not done yet</p>
+        <p class="hint">0 = Real, 1 = Fake</p>
+      </article>
+    </section>
+  </main>
+
+  <aside id="logs-panel" class="logs-panel" aria-live="polite">
+    <section class="tracker card">
+      <div class="tracker-head">
+        <h2>Live Pipeline Logs</h2>
+        <p id="job-id" class="mono">Job: --</p>
+      </div>
+      <div class="tracker-grid">
+        <article class="tracker-item">
+          <h3>Current Stage</h3>
+          <p id="stage-text">Idle</p>
+        </article>
+        <article class="tracker-item">
+          <h3>Model State</h3>
+          <p id="model-text">Waiting</p>
+        </article>
+      </div>
+      <div class="download-wrap">
+        <div class="download-meta">
+          <span>Download Progress</span>
+          <span id="download-text">0.0%</span>
+        </div>
+        <div class="progress-track">
+          <div id="download-bar" class="progress-fill"></div>
+        </div>
+      </div>
+      <div id="live-logs" class="live-logs"></div>
+    </section>
+  </aside>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
