@@ -47,7 +47,7 @@ For a YouTube URL submitted through the web app:
 | Model | Purpose | Output |
 | --- | --- | --- |
 | `MesoNet (Meso4)` | Detects face-level forgery artifacts | Score from `0.0` to `1.0`, where higher is more fake-like |
-| `Temp-D3 (XCLIP-16)` | Detects temporal anomalies in video frames | Raw anomaly score, where higher is more suspicious |
+| `Temp-D3 (XCLIP-16)` | Detects temporal anomalies in video frames | Score from `0.0` to `1.0`, where higher is more fake-like |
 
 ### Fusion Logic
 
