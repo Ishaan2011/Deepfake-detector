@@ -71,7 +71,6 @@ Deepfake_Detector/
 ├── temp-d3/
 ├── LICENSE
 ├── THIRD_PARTY.md
-└── test.ipynb
 ```
 
 ## Requirements
